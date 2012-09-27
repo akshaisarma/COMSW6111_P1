@@ -20,7 +20,7 @@ class Web_search(object):
 		search via Bing API, and return the results in XML format
 		"""
 		self.bingUrl = 'https://api.datamarket.azure.com/Data.ashx/Bing/SearchWeb/v1/Web?Query=%27'+query+'%27&$top='+str(topK)+'&$format=Atom'
-		# print bingUrl
+		# print self.bingUrl
 		accountKeyEnc = base64.b64encode(accountKey + ':' + accountKey)
 		headers = {'Authorization': 'Basic ' + accountKeyEnc}
 		req = urllib2.Request(self.bingUrl, headers = headers)

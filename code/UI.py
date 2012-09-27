@@ -39,9 +39,9 @@ class User_Interface(object):
 		"""
 		Search Bing by the query and display search results
 		"""
-		# xml_content = self.searcher.search_Bing(self.accountKey, topK, self.query)
+		xml_content = self.searcher.search_Bing(self.accountKey, topK, self.query)
 		# TODO...
-		xml_content = self.searcher.search_Bing_from_file(self.accountKey, topK, self.query)
+		#xml_content = self.searcher.search_Bing_from_file(self.accountKey, topK, self.query)
 		self.results = self.searcher.parse_XML(xml_content)
 		# print URL for Bing Search
 		print "URL: "+self.searcher.bingUrl
@@ -146,7 +146,8 @@ class User_Interface(object):
 			# print "word-count:"
 			# print (word, count)
 
-			newWords = newWords+" "+word
+			newWords = newWords + " " + word
+			self.query = self.query + "+" + word
 			index = index+1
 			if index>=2:
 				break
@@ -157,7 +158,6 @@ class User_Interface(object):
 			print "Below desired precision, but can no longer augment the query"
 			return False
 		else:
-			self.query = self.query+newWords
 			return True
 
 	def runIt(self):
