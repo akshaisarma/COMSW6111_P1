@@ -1,19 +1,36 @@
 # Author: Yuan Du (yd2234@columbia.edu)
+# Author: Akshai Sarma (as4107@columbia.edu)
 # Date: Sep 24, 2012
-# Function: user interface for 
+# Function: user interface for
 # Usage: python UI.py <AccountKey> <precision> <query>
 
 import sys
 from web_query import Web_search
 from collections import defaultdict
 import operator
+import string
 
+# =============== CONSTANTS =================
 # precision@10
 topK = 10
+# Path to file containing stop words
+stopWordsPath = 'stopwords.txt'
 
-# # Test standard input/output
-# name = raw_input("Enter your name: ")
-# print "Your name is "+name
+# Ranking algorithm constants
+
+# Score multiplier for position in results. E.g. Result 1 -> Scale 1.09
+positionScale = { k:1.09-0.01*k for k in range(0,10) }
+
+rTitleScale = 1.5 # Scaling for relevant Title words
+rSummaryScale = 1.0 # Scaling for relevant Summary words
+rCapSummaryScale = 2.0 # Scaling for relevant capitalized Summary words
+nrTitleScale = 1.0 # Scaling for non-relevant Title words
+nrSummaryScale = 0.5 # Scaling for non-relevant Summary words
+nrCapSummaryScale = 1.5 # Scaling for non-relevant capitalized Summary words
+
+# Constant for scaling query results after iteration
+alpha = 0.75
+# =============== CONSTANTS =================
 
 class User_Interface(object):
 
@@ -25,6 +42,10 @@ class User_Interface(object):
 		self.results = [] # search results (top K), initialzed to empty
 		self.user_feedback = [] # user responds "Y"/"N"
 		self.newWords = "" # new words augmented
+		self.wordIndex = defaultdict(float) # index for our ranking algorithm
+		# Load set of stop words
+		with open(stopWordsPath, 'r') as temp:
+			self.stopWords = frozenset(temp.read().split())
 
 	def print_search_parameter(self):
 		"""
@@ -48,7 +69,7 @@ class User_Interface(object):
 		print "Total no of results : "+str(self.searcher.results_len)
 		print "Bing Search Results:"
 		print "======================"
-		# print each result 
+		# print each result
 		self.user_feedback = []
 		index = 0
 		for entry in self.results:
@@ -58,9 +79,8 @@ class User_Interface(object):
 			summary = entry[1]
 			url = entry[2]
 			print "Result "+str(index)+"\n[\n URL: "+url+"\n Title: "+title+"\n Summary: "+summary+"\n]\n"
-			respond = raw_input("Relevant (Y/N)?")
-			# print "Your respond is "+respond
-			self.user_feedback.append(respond)
+			response = raw_input("Relevant (Y/N)?")
+			self.user_feedback.append(response)
 
 		print "======================"
 
@@ -74,13 +94,13 @@ class User_Interface(object):
 		print "Query "+self.query
 		# get the number correct results
 		correct_num = 0
-		for respond in self.user_feedback:
-			if respond=='Y':
+		for response in self.user_feedback:
+			if response == 'Y' or 'y':
 				correct_num = correct_num+1
 		# get the number of total results
 		total_num = len(self.results)
 
-		# check the denominator 
+		# check the denominator
 		if (total_num<0):
 			print "Error in feedback_summary: no search results returned for query="+self.query
 			return False
@@ -96,69 +116,39 @@ class User_Interface(object):
 			print "Still below the desired precision of "+str(self.precision)
 			return True
 
-	def reRanking(self):
+	def applyRanking(self, word, isTitleWord, isRelevant):
+		return
+
+	def augmentQuery():
+		return True
+
+	def ranking(self):
 		print "Indexing results ...."
-		queryWords = self.query.lower().split(" ")
-		word_count_dict = defaultdict(int)
 		for i in range(len(self.results)):
-			if self.user_feedback[i]=='Y':
-				# relevant result
-				result = self.results[i] 
-				title = result[0]
-				summary = result[1]
-				
-				# add words in title
-				titleWords = title.split(" ")
-				for word in titleWords:
-					if (len(word)>0): 
-						# filter query
-						lower_word = word.lower()
-						inQuery = False
-						for queryWord in queryWords:
-							if queryWord==lower_word:
-								inQuery = True
-								break
-						if inQuery==False:
-							word_count_dict[word] = word_count_dict[word]+1
+			result = self.results[i]
+			title = result[0]
+			summary = result[1]
+			# Remove punctuation and create lists of words
+			titleWords = title.translate(None, string.punctuation).split()
+			summaryWords = summary.translate(None, string.punctuation).split()
 
-				# add words in summary
-				summaryWords = summary.split(" ")
-				for word in summaryWords:
-					if (len(word)>0): 
-						# filter query
-						lower_word = word.lower()
-						inQuery = False
-						for queryWord in queryWords:
-							if queryWord==lower_word:
-								inQuery = True
-								break
-						if inQuery==False:
-							word_count_dict[word] = word_count_dict[word]+1
+			for tw in titleWords:
+				if tw.lower() in self.stopWords:
+					continue
+				if self.user_feedback[i]=='Y' or 'y':
+					applyRanking(i, tw, True, True)
+				else:
+					applyRanking(i, tw, True, False)
 
-		print "Indexing results ...."
+			for sw in summaryWords:
+				if sw.lower() in self.stopWords:
+					continue
+				if self.user_feedback[i]=='Y' or 'y':
+					applyRanking(i, sw, False, True)
+				else:
+					applyRanking(i, sw, False, False)
 
-		newWords = ""
-		# sort the counts by decreasing order and put in newWords
-		index = 0
-		# print word_count_dict
-		# print queryWords
-		for word, count in sorted(word_count_dict.iteritems(), key=operator.itemgetter(1), reverse=True):
-			# print "word-count:"
-			# print (word, count)
-
-			newWords = newWords + " " + word
-			self.query = self.query + "+" + word
-			index = index+1
-			if index>=2:
-				break
-
-		print "Augmenting by " + newWords
-		# check if no new words added, stop the procedure
-		if len(newWords)<=0:
-			print "Below desired precision, but can no longer augment the query"
-			return False
-		else:
-			return True
+		return augmentQuery()
 
 	def runIt(self):
 		"""
@@ -167,11 +157,11 @@ class User_Interface(object):
 		while (True):
 			self.print_search_parameter()
 			self.display_search()
-			# check if reaching desired precision or no related results 
+			# check if reaching desired precision or no related results
 			ifContinue = self.feedback_summary()
 			if (ifContinue==False):
 				break
-			ifContinue = self.reRanking()
+			ifContinue = self.ranking()
 			if (ifContinue==False):
 				break
 
@@ -197,4 +187,3 @@ if __name__ == "__main__":
 	query = sys.argv[3]
 
 	ui = User_Interface(accountKey, precision, query)
-	ui.runIt()

@@ -26,7 +26,7 @@ class Web_search(object):
 		req = urllib2.Request(self.bingUrl, headers = headers)
 		response = urllib2.urlopen(req)
 		content = response.read()
-		#content contains the xml/json response from Bing. 
+		#content contains the xml/json response from Bing.
 		# print content
 		return content
 
@@ -96,4 +96,4 @@ if __name__ == "__main__":
 	# parse xml for top K results (return [entry1, entry2,...] where each entry is [title, summary, url])
 	results = search.parse_XML(xml_content)
 	# print the results retrieved
-	search.printResults(results)
+
