@@ -80,7 +80,7 @@ class User_Interface(object):
 			url = entry[2]
 			print "Result "+str(index)+"\n[\n URL: "+url+"\n Title: "+title+"\n Summary: "+summary+"\n]\n"
 			response = raw_input("Relevant (Y/N)?")
-			self.user_feedback.append(response)
+			self.user_feedback.append(response.lower())
 
 		print "======================"
 
@@ -95,7 +95,7 @@ class User_Interface(object):
 		# get the number correct results
 		correct_num = 0
 		for response in self.user_feedback:
-			if response == 'Y' or 'y':
+			if response == 'y':
 				correct_num = correct_num+1
 		# get the number of total results
 		total_num = len(self.results)
@@ -123,24 +123,24 @@ class User_Interface(object):
 		"""
 
 		# Since it is a defaultdict, the entry will be created if it doesn't exist
-		score = self.wordIndex[tw.lower()]
+		score = self.wordIndex[word.lower()]
 		if isTitleWord:
 			if isRelevant:
-				score = score + rTitleScale * alpha[position]
+				score = score + rTitleScale * positionScale[position]
 			else:
-				score = score - nrTitleScale * alpha[position]
+				score = score - nrTitleScale * positionScale[position]
 		else:
-			if tw[0].isupper():
+			if word[0].isupper():
 				if isRelevant:
-					score = score + rCapSummaryScale * alpha[position]
+					score = score + rCapSummaryScale * positionScale[position]
 				else:
-					score = score - nrCapSummaryScale * alpha[position]
+					score = score - nrCapSummaryScale * positionScale[position]
 			else:
 				if isRelevant:
-					score = score + rSummaryScale * alpha[position]
+					score = score + rSummaryScale * positionScale[position]
 				else:
-					score = score - nrSummaryScale * alpha[position]
-		self.wordIndex[tw.lower()] = score
+					score = score - nrSummaryScale * positionScale[position]
+		self.wordIndex[word.lower()] = score
 		return
 
 	def augmentQuery(self):
@@ -163,6 +163,9 @@ class User_Interface(object):
 
 		# If we did not get a new word, then we have to stop. Very unlikely.
 		if nWords == 2:
+			# Change scores for next iteration
+			for w in self.wordIndex.iterkeys():
+				self.wordIndex[w] = self.wordIndex[w] * alpha
 			return True
 		else:
 			return False
@@ -175,8 +178,8 @@ class User_Interface(object):
 		print "Indexing results ...."
 		for i in range(len(self.results)):
 			result = self.results[i]
-			title = result[0]
-			summary = result[1]
+			title = result[0].encode('ascii', 'ignore')
+			summary = result[1].encode('ascii', 'ignore')
 			# Remove punctuation and create lists of words
 			titleWords = title.translate(None, string.punctuation).split()
 			summaryWords = summary.translate(None, string.punctuation).split()
@@ -184,20 +187,20 @@ class User_Interface(object):
 			for tw in titleWords:
 				if tw.lower() in self.stopWords:
 					continue
-				if self.user_feedback[i]=='Y' or 'y':
-					applyRanking(i, tw, True, True)
+				if self.user_feedback[i]=='y':
+					self.applyRanking(i, tw, True, True)
 				else:
-					applyRanking(i, tw, True, False)
+					self.applyRanking(i, tw, True, False)
 
 			for sw in summaryWords:
 				if sw.lower() in self.stopWords:
 					continue
-				if self.user_feedback[i]=='Y' or 'y':
-					applyRanking(i, sw, False, True)
+				if self.user_feedback[i]=='y':
+					self.applyRanking(i, sw, False, True)
 				else:
-					applyRanking(i, sw, False, False)
+					self.applyRanking(i, sw, False, False)
 
-		return augmentQuery()
+		return self.augmentQuery()
 
 	def runIt(self):
 		"""
