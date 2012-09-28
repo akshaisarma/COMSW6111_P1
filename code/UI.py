@@ -30,6 +30,9 @@ nrCapSummaryScale = 1.5 # Scaling for non-relevant capitalized Summary words
 
 # Constant for scaling query results after iteration
 alpha = 0.75
+
+# Constant for adding only one word if the ratio of the top two words is above this limit
+beta = 1.2
 # =============== CONSTANTS =================
 
 class User_Interface(object):
@@ -37,7 +40,8 @@ class User_Interface(object):
 	def __init__ (self, accountKey, precision, query):
 		self.accountKey = accountKey
 		self.precision = precision
-		self.query = query
+		self.query = query.lower()
+		self.internalQuery = "+".join(query.lower().split())
 		self.searcher = Web_search() # searcher for Bing
 		self.results = [] # search results (top K), initialzed to empty
 		self.user_feedback = [] # user responds "Y"/"N"
@@ -60,7 +64,7 @@ class User_Interface(object):
 		"""
 		Search Bing by the query and display search results
 		"""
-		xml_content = self.searcher.search_Bing(self.accountKey, topK, self.query)
+		xml_content = self.searcher.search_Bing(self.accountKey, topK, self.internalQuery)
 		# TODO...
 		#xml_content = self.searcher.search_Bing_from_file(self.accountKey, topK, self.query)
 		self.results = self.searcher.parse_XML(xml_content)
@@ -99,6 +103,11 @@ class User_Interface(object):
 				correct_num = correct_num+1
 		# get the number of total results
 		total_num = len(self.results)
+
+		# if nothing was relevant
+		if correct_num == 0:
+			print "No result was relevant. Quitting..."
+			return False
 
 		# check the denominator
 		if (total_num<0):
@@ -145,27 +154,40 @@ class User_Interface(object):
 
 	def augmentQuery(self):
 		"""
-		Adds two new words to the query. Returns True if it can else False.
+		Adds upto two new words to the query. Returns True if it could else False.
 		Also, changes values to alpha*values for next iteration
 		"""
-		queryWords = frozenset(query.lower().split())
-		nWords = 0
+		queryWords = frozenset(self.query.split())
+		nWordsAdded = 0
 
 		# Sort by score of the word in index
 		sortedByLargest = sorted(self.wordIndex.iteritems(), key=operator.itemgetter(1), reverse=True)
+		valueOfLargest = 0.0
+
 		for k,v in sortedByLargest:
-			if k.lower() in queryWords:
+			if k in queryWords:
 				continue
-			self.query = self.query + "+" + k.lower()
-			nWords+=1
-			if nWords == 2:
+
+			# Want to only add one word if the first word is overwhelmingly more relevant
+			# as we do not want to push the query down a wrong track
+			if nWordsAdded == 1 and v != 0.0:
+				if valueOfLargest/v > beta:
+					break
+
+			self.query = self.query + " " + k.lower()
+			self.internalQuery = self.internalQuery + "+" + k.lower()
+			valueOfLargest = v
+			nWordsAdded+=1
+
+			if nWordsAdded == 2:
 				break
 
+		# Change scores for next iteration
+		for w in self.wordIndex.iterkeys():
+			self.wordIndex[w] = self.wordIndex[w] * alpha
+
 		# If we did not get a new word, then we have to stop. Very unlikely.
-		if nWords == 2:
-			# Change scores for next iteration
-			for w in self.wordIndex.iterkeys():
-				self.wordIndex[w] = self.wordIndex[w] * alpha
+		if nWordsAdded > 0:
 			return True
 		else:
 			return False
