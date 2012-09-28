@@ -116,13 +116,62 @@ class User_Interface(object):
 			print "Still below the desired precision of "+str(self.precision)
 			return True
 
-	def applyRanking(self, word, isTitleWord, isRelevant):
+	def applyRanking(self, position, word, isTitleWord, isRelevant):
+		"""
+		Applies our ranking algorithm, based off Rocchio, depending on various factors,
+		such as if it is a Title word, capitalized in the Summary etc.
+		"""
+
+		# Since it is a defaultdict, the entry will be created if it doesn't exist
+		score = self.wordIndex[tw.lower()]
+		if isTitleWord:
+			if isRelevant:
+				score = score + rTitleScale * alpha[position]
+			else:
+				score = score - nrTitleScale * alpha[position]
+		else:
+			if tw[0].isupper():
+				if isRelevant:
+					score = score + rCapSummaryScale * alpha[position]
+				else:
+					score = score - nrCapSummaryScale * alpha[position]
+			else:
+				if isRelevant:
+					score = score + rSummaryScale * alpha[position]
+				else:
+					score = score - nrSummaryScale * alpha[position]
+		self.wordIndex[tw.lower()] = score
 		return
 
-	def augmentQuery():
-		return True
+	def augmentQuery(self):
+		"""
+		Adds two new words to the query. Returns True if it can else False.
+		Also, changes values to alpha*values for next iteration
+		"""
+		queryWords = frozenset(query.lower().split())
+		nWords = 0
+
+		# Sort by score of the word in index
+		sortedByLargest = sorted(self.wordIndex.iteritems(), key=operator.itemgetter(1), reverse=True)
+		for k,v in sortedByLargest:
+			if k.lower() in queryWords:
+				continue
+			self.query = self.query + "+" + k.lower()
+			nWords+=1
+			if nWords == 2:
+				break
+
+		# If we did not get a new word, then we have to stop. Very unlikely.
+		if nWords == 2:
+			return True
+		else:
+			return False
 
 	def ranking(self):
+		"""
+		For each result, removes stopwords, ranks the word, augments the query
+		and returns True if successful else False
+		"""
 		print "Indexing results ...."
 		for i in range(len(self.results)):
 			result = self.results[i]
@@ -163,6 +212,7 @@ class User_Interface(object):
 				break
 			ifContinue = self.ranking()
 			if (ifContinue==False):
+				print "Unable to augment query as all words are in query. Exiting ..."
 				break
 
 
@@ -187,3 +237,4 @@ if __name__ == "__main__":
 	query = sys.argv[3]
 
 	ui = User_Interface(accountKey, precision, query)
+	ui.runIt()
