@@ -21,18 +21,18 @@ stopWordsPath = 'stopwords.txt'
 # Score multiplier for position in results. E.g. Result 1 -> Scale 1.09
 positionScale = { k:1.09-0.01*k for k in range(0,10) }
 
-rTitleScale = 1.5 # Scaling for relevant Title words
+rTitleScale = 1.2 # Scaling for relevant Title words
 rSummaryScale = 1.0 # Scaling for relevant Summary words
-rCapSummaryScale = 2.0 # Scaling for relevant capitalized Summary words
+rCapSummaryScale = 1.4 # Scaling for relevant capitalized Summary words
 nrTitleScale = 1.0 # Scaling for non-relevant Title words
-nrSummaryScale = 0.5 # Scaling for non-relevant Summary words
-nrCapSummaryScale = 1.5 # Scaling for non-relevant capitalized Summary words
+nrSummaryScale = 0.8 # Scaling for non-relevant Summary words
+nrCapSummaryScale = 1.2 # Scaling for non-relevant capitalized Summary words
 
 # Constant for scaling query results after iteration
-alpha = 0.75
+alpha = 0.8
 
 # Constant for adding only one word if the ratio of the top two words is above this limit
-beta = 1.2
+beta = 2.0
 # =============== CONSTANTS =================
 
 class User_Interface(object):
@@ -209,7 +209,7 @@ class User_Interface(object):
 			for tw in titleWords:
 				if tw.lower() in self.stopWords:
 					continue
-				if self.user_feedback[i]=='y':
+				if self.user_feedback[i] == 'y':
 					self.applyRanking(i, tw, True, True)
 				else:
 					self.applyRanking(i, tw, True, False)
@@ -217,7 +217,7 @@ class User_Interface(object):
 			for sw in summaryWords:
 				if sw.lower() in self.stopWords:
 					continue
-				if self.user_feedback[i]=='y':
+				if self.user_feedback[i] == 'y':
 					self.applyRanking(i, sw, False, True)
 				else:
 					self.applyRanking(i, sw, False, False)

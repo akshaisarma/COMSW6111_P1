@@ -27,7 +27,6 @@ class Web_search(object):
 		response = urllib2.urlopen(req)
 		content = response.read()
 		#content contains the xml/json response from Bing.
-		# print content
 		return content
 
 	def search_Bing_from_file(self, accountKey, topK, query):
@@ -50,10 +49,14 @@ class Web_search(object):
 
 		results = []
 		for entry in xml_entries:
-			# get title/summary/url for each entry
+			# get title/summary/url for each entry. Summary may be empty
 			title = entry.getElementsByTagName("d:Title")[0].firstChild.data
-			summary = entry.getElementsByTagName("d:Description")[0].firstChild.data
 			url = entry.getElementsByTagName("d:Url")[0].firstChild.data
+			try:
+				summary = entry.getElementsByTagName("d:Description")[0].firstChild.data
+			except AttributeError:
+				summary = ""
+
 			plain_entry = [title, summary, url]
 			results.append(plain_entry)
 
@@ -95,5 +98,3 @@ if __name__ == "__main__":
 	xml_content = search.search_Bing(accountKey, topK, query)
 	# parse xml for top K results (return [entry1, entry2,...] where each entry is [title, summary, url])
 	results = search.parse_XML(xml_content)
-	# print the results retrieved
-
