@@ -21,18 +21,18 @@ stopWordsPath = 'stopwords.txt'
 # Score multiplier for position in results. E.g. Result 1 -> Scale 1.09
 positionScale = { k:1.09-0.01*k for k in range(0,10) }
 
-rTitleScale = 1.2 # Scaling for relevant Title words
+rTitleScale = 1.1 # Scaling for relevant Title words
 rSummaryScale = 1.0 # Scaling for relevant Summary words
-rCapSummaryScale = 1.4 # Scaling for relevant capitalized Summary words
+rCapSummaryScale = 1.15 # Scaling for relevant capitalized Summary words
 nrTitleScale = 1.0 # Scaling for non-relevant Title words
-nrSummaryScale = 0.8 # Scaling for non-relevant Summary words
-nrCapSummaryScale = 1.2 # Scaling for non-relevant capitalized Summary words
+nrSummaryScale = 0.9 # Scaling for non-relevant Summary words
+nrCapSummaryScale = 0.95 # Scaling for non-relevant capitalized Summary words
 
 # Constant for scaling query results after iteration
 alpha = 0.8
 
 # Constant for adding only one word if the ratio of the top two words is above this limit
-beta = 2.0
+beta = 1.5
 # =============== CONSTANTS =================
 
 class User_Interface(object):
