@@ -1,7 +1,7 @@
 # Author: Yuan Du (yd2234@columbia.edu)
 # Author: Akshai Sarma (as4107@columbia.edu)
 # Date: Sep 24, 2012
-# Function: user interface for
+# Function: user interface for Bing search
 # Usage: python UI.py <AccountKey> <precision> <query>
 
 import sys
@@ -39,13 +39,17 @@ beta = 1.5
 class User_Interface(object):
 
 	def __init__ (self, accountKey, precision, query):
+		# initialize positionScale
 		for k in range(0,10):
 			positionScale[k] = 1.09-0.01*k
 
+		# initialize other parameters
 		self.accountKey = accountKey
 		self.precision = precision
-		self.query = query.lower()
-		self.internalQuery = "+".join(query.lower().split())
+		# self.query = query.lower()
+		self.query = query # no need to lower, lower during augmenting
+
+		self.internalQuery = "+".join(query.lower().split()) # query used for URL of Bing search
 		self.searcher = Web_search() # searcher for Bing
 		self.results = [] # search results (top K), initialzed to empty
 		self.user_feedback = [] # user responds "Y"/"N"
@@ -68,9 +72,9 @@ class User_Interface(object):
 		"""
 		Search Bing by the query and display search results
 		"""
-		# xml_content = self.searcher.search_Bing(self.accountKey, topK, self.internalQuery)
+		xml_content = self.searcher.search_Bing(self.accountKey, topK, self.internalQuery)
 		# TODO...
-		xml_content = self.searcher.search_Bing_from_file(self.accountKey, topK, self.query)
+		# xml_content = self.searcher.search_Bing_from_file(self.accountKey, topK, self.query)
 		self.results = self.searcher.parse_XML(xml_content)
 		# print URL for Bing Search
 		print "URL: "+self.searcher.bingUrl
@@ -114,7 +118,7 @@ class User_Interface(object):
 		# 	return False
 
 		# check the denominator
-		if (total_num<0):
+		if (total_num<=0):
 			print "No search results returned for the query"
 			return False
 
@@ -161,7 +165,7 @@ class User_Interface(object):
 		Adds upto two new words to the query. Returns True if it could else False.
 		Also, changes values to alpha*values for next iteration
 		"""
-		queryWords = frozenset(self.query.split())
+		queryWords = frozenset(self.query.lower().split())
 		nWordsAdded = 0
 
 		# Sort by score of the word in index
@@ -244,13 +248,15 @@ class User_Interface(object):
 		"""
 		The main loop for user interface
 		"""
+		# repeat searching until desired precision reached, or no longer augment the query
 		while (True):
 			self.print_search_parameter()
 			self.display_search()
-			# check if reaching desired precision or no related results
+			# check if reaching desired precision
 			ifContinue = self.feedback_summary()
 			if (ifContinue==False):
 				break
+			# check if precision=0 or no longer augment the query
 			ifContinue = self.ranking()
 			if (ifContinue==False):
 				# print "Unable to augment query as all words are in query. Exiting ..."
@@ -260,6 +266,7 @@ class User_Interface(object):
 
 def usage():
 	print """
+	Usage:
 	python UI.sh <accountKey> <precision> <query>
 	where <accountKey> is the Bing Search Account Key,
 	<precision> is the target value for precision@10, a real between 0 and 1, and
