@@ -10,7 +10,7 @@
 # QUERY='snow leopard'
 # python UI.py $ACCOUNTKEY $PRECISION "$QUERY"
 
-SCRIPTPATH=/home/yd2234/ADB/proj1/code/COMSW6111_P1
+SCRIPTPATH=/home/yd2234/ADB/proj1/code/COMSW6111_P1/code
 SCRIPTNAME=UI.py
 
 python $SCRIPTPATH/$SCRIPTNAME "${1}" $2 "${3}"
