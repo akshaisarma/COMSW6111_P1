@@ -12,21 +12,20 @@ import string
 import os
 
 # =============== CONSTANTS =================
-# pwd
-pwd = os.getcwd()
-
 # precision@10
 topK = 10
 # Path to file containing stop words
+pwd = os.getcwd()
 stopWordsPath = pwd+"/stopwords.txt"
 
-# Ranking algorithm constants
+# === Ranking algorithm constants ===
 
-# Score multiplier for position in results. E.g. Result 1 -> Scale 1.09
-# positionScale = { k:1.09-0.01*k for k in range(0,10) }
+# Score multiplier for position in results. E.g. Result 1 -> Scale 1.09, Result 2 -> 1.08
+base = 1.09
+increment = 0.01
 positionScale = {}
 for k in range(0,10):
-	positionScale[k] = 1.09-0.01*k
+	positionScale[k] = base-increment*k
 
 rTitleScale = 1.1 # Scaling for relevant Title words
 rSummaryScale = 1.0 # Scaling for relevant Summary words
@@ -47,10 +46,8 @@ class User_Interface(object):
 	def __init__ (self, accountKey, precision, query):
 		self.accountKey = accountKey
 		self.precision = precision
-		# self.query = query.lower()
-		self.query = query # no need to lower, lower during augmenting
-
-		self.internalQuery = "+".join(query.lower().split()) # query used for URL of Bing search
+		self.query = query
+		self.internalQuery = "+".join(query.split()) # query used for URL of Bing search
 		self.searcher = Web_search() # searcher for Bing
 		self.results = [] # search results (top K), initialzed to empty
 		self.user_feedback = [] # user responds "Y"/"N"
@@ -74,8 +71,6 @@ class User_Interface(object):
 		"""
 		# call functions in web_query.py for Bing search and XML parse
 		xml_content = self.searcher.search_Bing(self.accountKey, topK, self.internalQuery)
-		# TODO...
-		# xml_content = self.searcher.search_Bing_from_file(self.accountKey, topK, self.query)
 		self.results = self.searcher.parse_XML(xml_content)
 
 		# print URL for Bing Search
@@ -83,6 +78,7 @@ class User_Interface(object):
 		print "Total no of results : "+str(self.searcher.results_len)
 		print "Bing Search Results:"
 		print "======================"
+
 		# print each result
 		self.user_feedback = []
 		index = 0
@@ -106,6 +102,7 @@ class User_Interface(object):
 		"""
 		print "FEEDBACK SUMMARY"
 		print "Query "+self.query
+
 		# get the number correct results
 		correct_num = 0
 		for response in self.user_feedback:
@@ -114,31 +111,32 @@ class User_Interface(object):
 		# get the number of total results
 		total_num = len(self.results)
 
-		# if nothing was relevant
-		# if correct_num == 0:
-		# 	print "No result was relevant. Quitting..."
-		# 	return False
-
 		# check the denominator
-		if (total_num<=0):
+		if (total_num <= 0):
 			print "No search results returned for the query"
 			return False
 
 		# if number of results <10, just terminate
-		if (total_num<topK):
+		if (total_num < topK):
 			print "Fewer than "+str(topK)+" results returned for the query"
 			return False
 
-		# precision by retrieved results
+		# precision of retrieved results
 		pre = 1.0*correct_num/total_num
 		print "Precision "+str(pre)
+
 		# check if reaching the desired precision
-		if self.precision<=pre:
+		if self.precision <= pre:
 			print "Desired precision reached, done"
 			return False
-		else:
-			print "Still below the desired precision of "+str(self.precision)
-			return True
+
+		print "Still below the desired precision of "+str(self.precision)
+
+		# if precision is 0, stop
+		if (pre == 0.0):
+			print "Below desired precision, but can no longer augment the query"
+			return False
+		return True
 
 	def applyRanking(self, position, word, isTitleWord, isRelevant):
 		"""
@@ -147,6 +145,8 @@ class User_Interface(object):
 		"""
 
 		# Since it is a defaultdict, the entry will be created if it doesn't exist
+		# Please read our README for details on our algorithm. The specifics are too
+		# long to mention here.
 		score = self.wordIndex[word.lower()]
 		if isTitleWord:
 			if isRelevant:
@@ -188,14 +188,11 @@ class User_Interface(object):
 			if k in queryWords:
 				continue
 
-			# Want to add words only if it gets score>0
-			if v<=0.0:
-				break
 			# Want to only add one word if the first word is overwhelmingly more relevant
-			# as we do not want to push the query down a wrong track
-			if nWordsAdded == 1 and v != 0.0:
-			# if nWordsAdded == 1 and v > 0.0:
-				if valueOfLargest/v > beta:
+			# as we do not want to push the query down a wrong track. We add a small constant
+			# to v as we do not want to divide by zero.
+			if nWordsAdded == 1:
+				if valueOfLargest/(v+0.001) > beta:
 					break
 
 			self.query = self.query + " " + k.lower()
@@ -211,7 +208,7 @@ class User_Interface(object):
 		for w in self.wordIndex.iterkeys():
 			self.wordIndex[w] = self.wordIndex[w] * alpha
 
-		print "Augmenting by "+newWords
+		print "Augmenting by " + newWords
 
 		# If we did not get a new word, then we have to stop. Very unlikely.
 		if nWordsAdded > 0:
@@ -262,14 +259,15 @@ class User_Interface(object):
 		while (True):
 			self.print_search_parameter()
 			self.display_search()
-			# check if reaching desired precision
+
+			# check if 0 precision or reached desired precision
 			ifContinue = self.feedback_summary()
-			if (ifContinue==False):
+			if (ifContinue == False):
 				break
-			# check if precision=0 or no longer augment the query
+
+			# check if we can no longer augment the query
 			ifContinue = self.ranking()
-			if (ifContinue==False):
-				# print "Unable to augment query as all words are in query. Exiting ..."
+			if (ifContinue == False):
 				print "Below desired precision, but can no longer augment the query"
 				break
 
