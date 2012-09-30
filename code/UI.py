@@ -24,7 +24,9 @@ stopWordsPath = pwd+"/stopwords.txt"
 
 # Score multiplier for position in results. E.g. Result 1 -> Scale 1.09
 # positionScale = { k:1.09-0.01*k for k in range(0,10) }
-positionScale = defaultdict(float)
+positionScale = {}
+for k in range(0,10):
+	positionScale[k] = 1.09-0.01*k
 
 rTitleScale = 1.1 # Scaling for relevant Title words
 rSummaryScale = 1.0 # Scaling for relevant Summary words
@@ -43,11 +45,6 @@ beta = 1.5
 class User_Interface(object):
 
 	def __init__ (self, accountKey, precision, query):
-		# initialize positionScale
-		for k in range(0,10):
-			positionScale[k] = 1.09-0.01*k
-
-		# initialize other parameters
 		self.accountKey = accountKey
 		self.precision = precision
 		# self.query = query.lower()
@@ -57,7 +54,6 @@ class User_Interface(object):
 		self.searcher = Web_search() # searcher for Bing
 		self.results = [] # search results (top K), initialzed to empty
 		self.user_feedback = [] # user responds "Y"/"N"
-		self.newWords = "" # new words augmented
 		self.wordIndex = defaultdict(float) # index for our ranking algorithm
 		# Load set of stop words
 		with open(stopWordsPath, 'r') as temp:
@@ -229,7 +225,7 @@ class User_Interface(object):
 		and returns True if successful else False
 		"""
 		print "Indexing results ...."
-		
+
 		for i in range(len(self.results)):
 			result = self.results[i]
 			title = result[0].encode('ascii', 'ignore')
