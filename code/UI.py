@@ -19,7 +19,8 @@ stopWordsPath = 'stopwords.txt'
 # Ranking algorithm constants
 
 # Score multiplier for position in results. E.g. Result 1 -> Scale 1.09
-positionScale = { k:1.09-0.01*k for k in range(0,10) }
+# positionScale = { k:1.09-0.01*k for k in range(0,10) }
+positionScale = defaultdict(float)
 
 rTitleScale = 1.1 # Scaling for relevant Title words
 rSummaryScale = 1.0 # Scaling for relevant Summary words
@@ -38,6 +39,9 @@ beta = 1.5
 class User_Interface(object):
 
 	def __init__ (self, accountKey, precision, query):
+		for k in range(0,10):
+			positionScale[k] = 1.09-0.01*k
+
 		self.accountKey = accountKey
 		self.precision = precision
 		self.query = query.lower()
@@ -64,9 +68,9 @@ class User_Interface(object):
 		"""
 		Search Bing by the query and display search results
 		"""
-		xml_content = self.searcher.search_Bing(self.accountKey, topK, self.internalQuery)
+		# xml_content = self.searcher.search_Bing(self.accountKey, topK, self.internalQuery)
 		# TODO...
-		# xml_content = self.searcher.search_Bing_from_file(self.accountKey, topK, self.query)
+		xml_content = self.searcher.search_Bing_from_file(self.accountKey, topK, self.query)
 		self.results = self.searcher.parse_XML(xml_content)
 		# print URL for Bing Search
 		print "URL: "+self.searcher.bingUrl
