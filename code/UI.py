@@ -9,12 +9,16 @@ from web_query import Web_search
 from collections import defaultdict
 import operator
 import string
+import os
 
 # =============== CONSTANTS =================
+# pwd
+pwd = os.getcwd()
+
 # precision@10
 topK = 10
 # Path to file containing stop words
-stopWordsPath = 'stopwords.txt'
+stopWordsPath = pwd+"/stopwords.txt"
 
 # Ranking algorithm constants
 
@@ -73,9 +77,9 @@ class User_Interface(object):
 		Search Bing by the query and display search results
 		"""
 		# call functions in web_query.py for Bing search and XML parse
-		xml_content = self.searcher.search_Bing(self.accountKey, topK, self.internalQuery)
+		# xml_content = self.searcher.search_Bing(self.accountKey, topK, self.internalQuery)
 		# TODO...
-		# xml_content = self.searcher.search_Bing_from_file(self.accountKey, topK, self.query)
+		xml_content = self.searcher.search_Bing_from_file(self.accountKey, topK, self.query)
 		self.results = self.searcher.parse_XML(xml_content)
 
 		# print URL for Bing Search
@@ -122,6 +126,11 @@ class User_Interface(object):
 		# check the denominator
 		if (total_num<=0):
 			print "No search results returned for the query"
+			return False
+
+		# if number of results <10, just terminate
+		if (total_num<topK):
+			print "Fewer than "+str(topK)+" results returned for the query"
 			return False
 
 		# precision by retrieved results
