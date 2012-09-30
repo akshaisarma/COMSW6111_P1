@@ -5,7 +5,7 @@
 # Function: test UI.py by given account key, precision and query
 # Usage: ./run.sh
 
-ACCOUNTKEY="MWQrrA8YW+6ciAUTJh56VHz1vi/Mdqu0lSbzms3N7NY="
+ACCOUNTKEY='MWQrrA8YW+6ciAUTJh56VHz1vi/Mdqu0lSbzms3N7NY='
 PRECISION=0.9
-QUERY="gates"
-python UI.py $ACCOUNTKEY $PRECISION $QUERY
+QUERY='snow leopard'
+python UI.py $ACCOUNTKEY $PRECISION "$QUERY"

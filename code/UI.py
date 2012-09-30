@@ -66,7 +66,7 @@ class User_Interface(object):
 		"""
 		xml_content = self.searcher.search_Bing(self.accountKey, topK, self.internalQuery)
 		# TODO...
-		#xml_content = self.searcher.search_Bing_from_file(self.accountKey, topK, self.query)
+		# xml_content = self.searcher.search_Bing_from_file(self.accountKey, topK, self.query)
 		self.results = self.searcher.parse_XML(xml_content)
 		# print URL for Bing Search
 		print "URL: "+self.searcher.bingUrl
@@ -105,13 +105,13 @@ class User_Interface(object):
 		total_num = len(self.results)
 
 		# if nothing was relevant
-		if correct_num == 0:
-			print "No result was relevant. Quitting..."
-			return False
+		# if correct_num == 0:
+		# 	print "No result was relevant. Quitting..."
+		# 	return False
 
 		# check the denominator
 		if (total_num<0):
-			print "Error in feedback_summary: no search results returned for query="+self.query
+			print "No search results returned for the query"
 			return False
 
 		# precision by retrieved results
@@ -164,13 +164,20 @@ class User_Interface(object):
 		sortedByLargest = sorted(self.wordIndex.iteritems(), key=operator.itemgetter(1), reverse=True)
 		valueOfLargest = 0.0
 
+		newWords = ""
+
 		for k,v in sortedByLargest:
 			if k in queryWords:
 				continue
 
+			# print "nWordsAdded="+str(nWordsAdded)+";k="+k+";v="+str(v)
+			# Want to add words only if it gets score>0
+			if v<=0.0:
+				break
 			# Want to only add one word if the first word is overwhelmingly more relevant
 			# as we do not want to push the query down a wrong track
 			if nWordsAdded == 1 and v != 0.0:
+			# if nWordsAdded == 1 and v > 0.0:
 				if valueOfLargest/v > beta:
 					break
 
@@ -178,6 +185,7 @@ class User_Interface(object):
 			self.internalQuery = self.internalQuery + "+" + k.lower()
 			valueOfLargest = v
 			nWordsAdded+=1
+			newWords = newWords+" "+k.lower()
 
 			if nWordsAdded == 2:
 				break
@@ -185,6 +193,8 @@ class User_Interface(object):
 		# Change scores for next iteration
 		for w in self.wordIndex.iterkeys():
 			self.wordIndex[w] = self.wordIndex[w] * alpha
+
+		print "Augmenting by "+newWords
 
 		# If we did not get a new word, then we have to stop. Very unlikely.
 		if nWordsAdded > 0:
@@ -222,6 +232,8 @@ class User_Interface(object):
 				else:
 					self.applyRanking(i, sw, False, False)
 
+		print "Indexing results ...."
+
 		return self.augmentQuery()
 
 	def runIt(self):
@@ -237,7 +249,8 @@ class User_Interface(object):
 				break
 			ifContinue = self.ranking()
 			if (ifContinue==False):
-				print "Unable to augment query as all words are in query. Exiting ..."
+				# print "Unable to augment query as all words are in query. Exiting ..."
+				print "Below desired precision, but can no longer augment the query"
 				break
 
 

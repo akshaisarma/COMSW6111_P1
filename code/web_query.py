@@ -75,6 +75,7 @@ class Web_search(object):
 
 def usage():
 	print """
+	Usage:
 	python web_query.py <topK> <query>
 	where <topK> is the number of results to be retrieved, and
 		  <query> is the query to search in Bing.
