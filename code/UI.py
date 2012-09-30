@@ -77,9 +77,9 @@ class User_Interface(object):
 		Search Bing by the query and display search results
 		"""
 		# call functions in web_query.py for Bing search and XML parse
-		# xml_content = self.searcher.search_Bing(self.accountKey, topK, self.internalQuery)
+		xml_content = self.searcher.search_Bing(self.accountKey, topK, self.internalQuery)
 		# TODO...
-		xml_content = self.searcher.search_Bing_from_file(self.accountKey, topK, self.query)
+		# xml_content = self.searcher.search_Bing_from_file(self.accountKey, topK, self.query)
 		self.results = self.searcher.parse_XML(xml_content)
 
 		# print URL for Bing Search

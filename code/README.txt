@@ -17,20 +17,16 @@ b) A list of all the files that you are submitting
 
 c) A clear description of how to run your program
 
-Similar to the reference, run the following from your CS account:
+Similar to the reference, run the following from the directory where you put all the scripts (NOTE: you must cd to that directory before running this command):
 
-<script-directory>/run.sh <bing account key> <precision> <query>
+./run.sh <bing account key> <precision> <query>
+
 , where:
-<script-directory> is where you put all the scripts (e.g., ./run.sh if you put run.sh in current directory)
 <bing account key > is your Bing Search Account Key (see above)
 <query> is your query, a list of words in single quotes (e.g., 'Milky Way')
 <precision> is the target value for precision@10, a real between 0 and 1
 
 For example, you can run this in CLIC machine:
-/home/yd2234/ADB/proj1/code/COMSW6111_P1/code/run.sh 'MWQrrA8YW+6ciAUTJh56VHz1vi/Mdqu0lSbzms3N7NY=' 0.9 'snow leopard'
-
-OR run by 2 steps:
-
 cd /home/yd2234/ADB/proj1/code/COMSW6111_P1/code
 ./run.sh 'MWQrrA8YW+6ciAUTJh56VHz1vi/Mdqu0lSbzms3N7NY=' 0.9 'snow leopard'
 
