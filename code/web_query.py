@@ -26,10 +26,13 @@ class Web_search(object):
 		req = urllib2.Request(self.bingUrl, headers = headers)
 		response = urllib2.urlopen(req)
 		content = response.read()
-		#content contains the xml/json response from Bing.
+		# content contains the xml/json response from Bing.
 		return content
 
 	def search_Bing_from_file(self, accountKey, topK, query):
+		"""
+		search_Bing alternative function, which will return the content in local XML file
+		"""
 		document = "sample_result.xml"
 		try:
 			input = file(document,"r")
@@ -64,6 +67,9 @@ class Web_search(object):
 		return results
 
 	def printResults(self, content):
+		"""
+		print the results retrieved
+		"""
 		for entry in content:
 			title = entry[0]
 			summary = entry[1]

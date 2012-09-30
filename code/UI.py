@@ -72,10 +72,12 @@ class User_Interface(object):
 		"""
 		Search Bing by the query and display search results
 		"""
+		# call functions in web_query.py for Bing search and XML parse
 		xml_content = self.searcher.search_Bing(self.accountKey, topK, self.internalQuery)
 		# TODO...
 		# xml_content = self.searcher.search_Bing_from_file(self.accountKey, topK, self.query)
 		self.results = self.searcher.parse_XML(xml_content)
+
 		# print URL for Bing Search
 		print "URL: "+self.searcher.bingUrl
 		print "Total no of results : "+str(self.searcher.results_len)
@@ -172,13 +174,15 @@ class User_Interface(object):
 		sortedByLargest = sorted(self.wordIndex.iteritems(), key=operator.itemgetter(1), reverse=True)
 		valueOfLargest = 0.0
 
+		# keep track of the new words augmented
 		newWords = ""
 
+		# check all the words from highest score
 		for k,v in sortedByLargest:
+			# filter those already in the query
 			if k in queryWords:
 				continue
 
-			# print "nWordsAdded="+str(nWordsAdded)+";k="+k+";v="+str(v)
 			# Want to add words only if it gets score>0
 			if v<=0.0:
 				break
@@ -216,6 +220,7 @@ class User_Interface(object):
 		and returns True if successful else False
 		"""
 		print "Indexing results ...."
+		
 		for i in range(len(self.results)):
 			result = self.results[i]
 			title = result[0].encode('ascii', 'ignore')
