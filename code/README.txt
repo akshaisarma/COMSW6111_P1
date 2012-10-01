@@ -109,7 +109,7 @@ and the values are their scores. We do not distinguish relevant and irrelevant w
 is expected to score irrelevant words below relevant words. This makes our design simple.
 
 Once we have the feedback and the top 10 results, for each result (except for the first
-set of results, where we something slightly different), we go through the results
+set of results, where we something slightly different), we go through the results, after removing punctuations,
 as follows :
 
 for each word, we adjust its score as follows (if it doesn't exist, its previous score is 0.0):
@@ -134,6 +134,23 @@ word is added.
 
 Finally, we multiply each score in the dictionary by the factor of alpha, so that this iteration does not
 influence the subsequent iterations too much (exponential decay).
+
+Using this algorithm, it is possible that we may end up picking a word that appears only in a non-relevant
+result. We wish to justify this and how it is not so bad a thing. Your algorithm for instance stops when
+you have precision != 0 but can't find any suitable words. The situation we are talking about is
+illustrated with a toy example.
+
+Suppose, only one result was relevant and the other 9 weren't. The only word in this result is "apple" but
+it also appears in all the other 9 results. As a result (ignoring the position scale - assume it is the
+first iteration), its score will be 1* rs - 9*nrs or 1 - 8.1 or -7.1
+Now assume, the word "banana" appears in 2 of the 9 non-relevant results. It's score will because
+-2*nrs or -1.8.
+
+Our algorithm will then choose to augment by "banana". We claim that this is not so bad. The only other
+option is stopping the algorithm immediately (as your implementation does). All that can happen by
+augmenting with "banana", is that the next iteration may have a decrease in precision or even terminate
+then. Our method, in this extreme example, instead of failing, tries to recover. So, we think that it is
+reasonable to augment by words that only appear in non-relevant entries if the alternative is stopping.
 
 f) Your Bing Search Account Key
 

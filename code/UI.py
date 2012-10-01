@@ -10,6 +10,7 @@ from collections import defaultdict
 import operator
 import string
 import os
+import unicodedata
 
 # =============== CONSTANTS =================
 # precision@10
@@ -53,6 +54,7 @@ class User_Interface(object):
 		self.user_feedback = [] # user responds "Y"/"N"
 		self.wordIndex = defaultdict(float) # index for our ranking algorithm
 		self.firstIteration = True
+
 		# Load set of stop words
 		with open(stopWordsPath, 'r') as temp:
 			self.stopWords = frozenset(temp.read().split())
@@ -236,11 +238,12 @@ class User_Interface(object):
 
 		for i in range(len(self.results)):
 			result = self.results[i]
-			title = result[0].encode('ascii', 'ignore')
-			summary = result[1].encode('ascii', 'ignore')
+			title = result[0]
+			summary = result[1]
+
 			# Remove punctuation and create lists of words
-			titleWords = title.translate(None, string.punctuation).split()
-			summaryWords = summary.translate(None, string.punctuation).split()
+			titleWords = "".join(c for c in title if not unicodedata.category(c).startswith('P')).split()
+			summaryWords = "".join(c for c in summary if not unicodedata.category(c).startswith('P')).split()
 
 			for tw in titleWords:
 				if tw.lower() in self.stopWords:
