@@ -1,4 +1,4 @@
-######## Part 1. Here comes the transcript for 'snow leopard'  ###########
+######## Part 1. Here is the transcript for 'snow leopard'  ###########
 
 Parameters:
 Client key  = MWQrrA8YW+6ciAUTJh56VHz1vi/Mdqu0lSbzms3N7NY=
@@ -76,7 +76,7 @@ Result 9
 [
  URL: http://store.apple.com/us/search?find=mac+os+x+10.6+snow+leopard
  Title: Snow Leopard
- Summary: 
+ Summary:
 ]
 
 Relevant (Y/N)?Y
@@ -132,7 +132,7 @@ Result 4
 [
  URL: http://store.apple.com/us/search?find=mac+os+x+10.6+snow+leopard
  Title: Snow Leopard
- Summary: 
+ Summary:
 ]
 
 Relevant (Y/N)?Y
@@ -192,7 +192,7 @@ Desired precision reached, done
 
 
 
-######## Part 2. Here comes the transcript for 'gates'  ###########
+######## Part 2. Here is the transcript for 'gates'  ###########
 
 Parameters:
 Client key  = MWQrrA8YW+6ciAUTJh56VHz1vi/Mdqu0lSbzms3N7NY=
@@ -386,7 +386,7 @@ Desired precision reached, done
 
 
 
-######## Part 3. Here comes the transcript for 'bill'  ###########
+######## Part 3. Here is the transcript for 'bill'  ###########
 
 Parameters:
 Client key  = MWQrrA8YW+6ciAUTJh56VHz1vi/Mdqu0lSbzms3N7NY=

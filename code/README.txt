@@ -6,10 +6,10 @@ Yuan Du (yd2234)
 Akshai Sarma (as4107)
 
 
-b) A list of all the files that you are submitting
+b) A list of all the files that you are submitting:
 
-* run.sh 		(a shell script that run all the codes)
-* UI.py 		(the main python script for the user interface)
+* run.sh 		(a shell script that runs all the codes)
+* UI.py 		(the main python script for the user interface and ranking)
 * web_query.py 	(a python script for querying Bing API)
 * stopwords.txt (a file containing stop word list)
 * README.txt 	(this readme file)
@@ -45,3 +45,8 @@ f) Your Bing Search Account Key
 
 MWQrrA8YW+6ciAUTJh56VHz1vi/Mdqu0lSbzms3N7NY=
 
+g) Any other information you consider significant
+
+We added a few more common contractions of stopwords in additon to our list of stopwords obtained
+through the citation below.
+	Stopwords list: Ranks NL. http://www.ranks.nl/resources/stopwords.html

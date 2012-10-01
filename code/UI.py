@@ -52,6 +52,7 @@ class User_Interface(object):
 		self.results = [] # search results (top K), initialzed to empty
 		self.user_feedback = [] # user responds "Y"/"N"
 		self.wordIndex = defaultdict(float) # index for our ranking algorithm
+		self.firstIteration = True
 		# Load set of stop words
 		with open(stopWordsPath, 'r') as temp:
 			self.stopWords = frozenset(temp.read().split())
@@ -144,26 +145,32 @@ class User_Interface(object):
 		such as if it is a Title word, capitalized in the Summary etc.
 		"""
 
+		positionScore = positionScale[position]
+		# Don't position scale the first results because we have no idea about relevance
+		if (self.firstIteration):
+			positionScore = 1.0
+			self.firstIteration = False
+
 		# Since it is a defaultdict, the entry will be created if it doesn't exist
 		# Please read our README for details on our algorithm. The specifics are too
 		# long to mention here.
 		score = self.wordIndex[word.lower()]
 		if isTitleWord:
 			if isRelevant:
-				score = score + rTitleScale * positionScale[position]
+				score = score + rTitleScale * positionScore
 			else:
-				score = score - nrTitleScale * positionScale[position]
+				score = score - nrTitleScale * positionScore
 		else:
 			if word[0].isupper():
 				if isRelevant:
-					score = score + rCapSummaryScale * positionScale[position]
+					score = score + rCapSummaryScale * positionScore
 				else:
-					score = score - nrCapSummaryScale * positionScale[position]
+					score = score - nrCapSummaryScale * positionScore
 			else:
 				if isRelevant:
-					score = score + rSummaryScale * positionScale[position]
+					score = score + rSummaryScale * positionScore
 				else:
-					score = score - nrSummaryScale * positionScale[position]
+					score = score - nrSummaryScale * positionScore
 		self.wordIndex[word.lower()] = score
 		return
 
