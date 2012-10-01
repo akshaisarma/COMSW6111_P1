@@ -135,6 +135,10 @@ class User_Interface(object):
 
 		# if precision is 0, stop
 		if (pre == 0.0):
+			# To keep the output consistent with your implementation
+			print "Indexing results ...."
+			print "Indexing results ...."
+			print "Augmenting by "
 			print "Below desired precision, but can no longer augment the query"
 			return False
 		return True
