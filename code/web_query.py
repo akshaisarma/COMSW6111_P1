@@ -44,7 +44,7 @@ class Web_search(object):
 
 	def parse_XML(self, xml):
 		"""
-		Returl the title/summary/url for each search result
+		Parse the XML content from Bing API, and return the title/summary/url for each search result
 		"""
 		# doc = minidom.parseString(xml) # when input is string
 		doc = minidom.parseString(xml)

@@ -1,11 +1,11 @@
 Project 1 for COMS E6111 Advanced Database Systems
-
+-------------------------------------------------------------
 a) Your name and your partner's name and Columbia UNI
 
 Yuan Du (yd2234)
 Akshai Sarma (as4107)
 
-
+-------------------------------------------------------------
 b) A list of all the files that you are submitting:
 * Makefile		 (instructions on how to run the code)
 * run.sh 		 (a shell script that runs all the codes)
@@ -15,6 +15,7 @@ b) A list of all the files that you are submitting:
 * README.txt 	 (this readme file)
 * transcript.txt (a transcript for 3 test cases)
 
+-------------------------------------------------------------
 c) A clear description of how to run your program
 
 Similar to the reference, run the following from the directory where you put all the scripts (NOTE: you must cd to that directory before running this command):
@@ -30,33 +31,59 @@ For example, on a CLIC machine:
 cd /home/yd2234/ADB/proj1/code/COMSW6111_P1/code
 ./run.sh 'MWQrrA8YW+6ciAUTJh56VHz1vi/Mdqu0lSbzms3N7NY=' 0.9 'snow leopard'
 
-
+-------------------------------------------------------------
 d) A clear description of the internal design of your project
 
-TODO...
+We have two python scripts: UI.py and web_query.py. The following are detailed description for each of them.
+
+1. web_query.py 
+This is a tool script for querying Bing API and parsing the XML results. The main functions include:
+	* search_Bing: search via Bing API and return the results in XML format 
+	* parse_XML: parse the XML content from Bing API, and return the title/summary/url for each search result
+	(Input: XML from function search_Bing; Output: a list of top 10 results with their titles, summaries and urls)
+It will firstly call function search_Bing and then call function parse_XML.
+
+2. UI.py
+This is the main python script for the user interface and ranking. The main functions include:
+	* runIt: the main loop for user interface. 
+	It wil repeatedly search the query (each time augmented by at most two new words) until desired precision reached, or can no longer augment the query.
+	This function calls those functions step by step:
+		- print_search_parameter (print the parameters for searching)
+		- display_search (display search results by Bing API, and receive user feedback)
+		- feedback_summary (summarize all the user feedbacks)
+		- ranking (if the termination conditions are not satisfied, augment the query and repeat from the whole procedure)
+	(Detailed information for each of them are in the following.)
+
+	* print_search_parameter: print parameters for searching such as client key, query and desired precision
+
+	* display_search: use the tool script web_query.py to search Bing by the query and display search results. Users can give feedbacks by user interface.
+
+	* feedback_summary: compute the precision by retrieved results. Return True if more search is needed; otherwise return False (if number of relevant results is 0, or desired precision is reached)
+
+	* ranking: for each result, removes stopwords, ranks the word, augments the query and returns True if the query can be augmented, otherwise returns False
+
+	* applyRanking: compute the ranking score for a given word. Applies our ranking algorithm, based on Rocchio, depending on various factors, such as if it is a Title word, capitalized in the Summary etc.
+	It is called by function ranking.
+
+	* augmentQuery: adds up to two new words to the query. Returns True if it could else False. Also, changes scores for all the words to alpha*scores for next iteration.
+	It is called by function ranking.
 
 
+-------------------------------------------------------------
 e) A detailed description of your query-modification method
 
 We initially considered using Rocchio as our query augmentation. As we have
 not indexed the space of all documents and don't have weights for words
 (i.e. something like tf-idf), we decided to design our own algorithm based
-off Rocchio and certain patterns that we noticed. The list mentions scores and weights,
-which are how we judge words to be relevant. In other words, the higher the score, the more
-relevant we consider to word. The following were our key observations/generalizations
-(in no particular order):
+on Rocchio and certain patterns that we noticed. The list mentions scores and weights,
+which are how we judge words to be relevant. In other words, the higher the score, the more relevant we consider to word. The following were our key observations/generalizations (in no particular order):
 
 	1. Once we have relevant results, we can use the search engine's own precision@x, for the
-	1 <= x < 10 results, to establish an order amongst the relevant and irrelevant results. For example,
-	the words in a relevant result at position 1 may be more important than the words in a relevant
-	result at position 10.
+	1 <= x < 10 results, to establish an order amongst the relevant and irrelevant results. For example, the words in a relevant result at position 1 may be more important than the words in a relevant result at position 10.
 
-	2. Title words are generally more important than the words in the summary, as titles are generally
-	a distillation of the subject matter.
+	2. Title words are generally more important than the words in the summary, as titles are generally a distillation of the subject matter.
 
-	3. Capitalized words in the summary (does not work in the Title as mostly all are capitalized),
-	are generally better important than the other words because they turn out to be nouns or keywords
-	and are usually the focus of the relevant results.
+	3. Capitalized words in the summary (does not work in the Title as mostly all are capitalized), are generally better important than the other words because they turn out to be nouns or keywords and are usually the focus of the relevant results.
 
 	4. Once weights are assigned to words and since we may augment by at most two, it is generally a
 	bad idea to always choose two words to augment by. For instance, if the word with the highest scores
@@ -135,17 +162,17 @@ word is added.
 Finally, we multiply each score in the dictionary by the factor of alpha, so that this iteration does not
 influence the subsequent iterations too much (exponential decay).
 
+-------------------------------------------------------------
 f) Your Bing Search Account Key
 
 MWQrrA8YW+6ciAUTJh56VHz1vi/Mdqu0lSbzms3N7NY=
 
-
+-------------------------------------------------------------
 g) Any other information you consider significant
 
-(1) We added a few more common contractions of stopwords in additon to our list of stopwords obtained
-through the citation below.
+1. We added a few more common contractions of stopwords in additon to our list of stopwords obtained through the citation below.
 	Stopwords list: Ranks NL. http://www.ranks.nl/resources/stopwords.html
 
-(2) According to our experiment, all the testcases will need ONLY ONE iteraction of user-feedback before reaching the perfect precision (that is, precision=1.0).
+2. According to our experiment, all the testcases will need ONLY ONE iteraction of user-feedback before reaching the perfect precision (that is, precision=1.0).
 Besides the three testcases in course page ('snow leopard', 'gates' and 'bill'), we have tested query [giants] both for the New York Giants football team and the San Francisco Giants baseball team. 
 Those two teams share a lot of common words such as 'schedule'. In our program, "new york" or "san francisco" will be augmented in each case.

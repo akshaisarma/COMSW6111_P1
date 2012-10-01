@@ -99,12 +99,12 @@ class User_Interface(object):
 		"""
 		Compute the precision by retrieved results
 		Return True if more search is needed
-		otherwise return False (if number of retrieved results is 0, or desired precision is reached)
+		otherwise return False (if number of relevant results is 0, or desired precision is reached)
 		"""
 		print "FEEDBACK SUMMARY"
 		print "Query "+self.query
 
-		# get the number correct results
+		# get the number of correct results
 		correct_num = 0
 		for response in self.user_feedback:
 			if response == 'y':
@@ -131,11 +131,12 @@ class User_Interface(object):
 			print "Desired precision reached, done"
 			return False
 
+		# still below the desired precision
 		print "Still below the desired precision of "+str(self.precision)
 
 		# if precision is 0, stop
 		if (pre == 0.0):
-			# To keep the output consistent with your implementation
+			# To keep the output consistent with reference implementation
 			print "Indexing results ...."
 			print "Indexing results ...."
 			print "Augmenting by "
