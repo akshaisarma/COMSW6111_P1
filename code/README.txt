@@ -139,8 +139,13 @@ f) Your Bing Search Account Key
 
 MWQrrA8YW+6ciAUTJh56VHz1vi/Mdqu0lSbzms3N7NY=
 
+
 g) Any other information you consider significant
 
-We added a few more common contractions of stopwords in additon to our list of stopwords obtained
+(1) We added a few more common contractions of stopwords in additon to our list of stopwords obtained
 through the citation below.
 	Stopwords list: Ranks NL. http://www.ranks.nl/resources/stopwords.html
+
+(2) According to our experiment, all the testcases will need ONLY ONE iteraction of user-feedback before reaching the perfect precision (that is, precision=1.0).
+Besides the three testcases in course page ('snow leopard', 'gates' and 'bill'), we have tested query [giants] both for the New York Giants football team and the San Francisco Giants baseball team. 
+Those two teams share a lot of common words such as 'schedule'. In our program, "new york" or "san francisco" will be augmented in each case.
