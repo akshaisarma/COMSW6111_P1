@@ -34,7 +34,7 @@ nrTitleScale = 1.0 # Scaling for non-relevant Title words
 nrSummaryScale = 0.9 # Scaling for non-relevant Summary words
 nrCapSummaryScale = 0.95 # Scaling for non-relevant capitalized Summary words
 
-# Constant for scaling query results after iteration
+# Constant for scaling word scores after iteration
 alpha = 0.8
 
 # Constant for adding only one word if the ratio of the top two words is above this limit
