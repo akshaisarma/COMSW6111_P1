@@ -113,6 +113,9 @@ set of results, where we something slightly different), we go through the result
 as follows :
 
 for each word, we adjust its score as follows (if it doesn't exist, its previous score is 0.0):
+	if the word is a stopword and since we keep a list of stopwords (Citation below), we continue
+	to the next word.
+
 	if it is from a relevant result, we add either (rt or rs or rcs) * positionScale{position} to its score
 	depending on whether it was a title, summary or capitalized summary word.
 
