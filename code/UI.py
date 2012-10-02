@@ -181,9 +181,94 @@ class User_Interface(object):
 		self.wordIndex[word.lower()] = score
 		return
 
+	def reorderQuery(self):
+		"""
+		Re-order the words in the expanded query
+		"""
+
+		# constraints for the order of words, e.g., bill should be on the left of gates
+		coOccurDict = defaultdict(int) # dictionary for the count of co-occurance pair
+		queryWords = self.query.split()
+		queryWordsLower = self.query.lower().split()
+
+		# try all the relevant documents
+		for i in range(len(self.results)):
+			result = self.results[i]
+			title = result[0]
+			summary = result[1]
+
+			# do only for relevant docs
+			if self.user_feedback[i] != 'y':
+				continue
+
+			# Must be relevant results now
+			# Remove punctuation and create lists of words
+			titleWords = "".join(c for c in title if not unicodedata.category(c).startswith('P')).split()
+			summaryWords = "".join(c for c in summary if not unicodedata.category(c).startswith('P')).split()
+
+			# add co-occurance pair in title
+			for i in range(len(titleWords)-1):
+				currentWord = titleWords[i]
+				nextWord = titleWords[i+1]
+
+				# check if they are the identical words
+				if currentWord.lower() == nextWord.lower():
+					continue
+
+				# checking whether current word and next word are in query
+				if (currentWord.lower() in queryWordsLower) and (nextWord.lower() in queryWordsLower):
+					# update the constraints in coOccurDict
+					coOccurDict[(currentWord.lower(), nextWord.lower())] = coOccurDict[(currentWord.lower(), nextWord.lower())]+1
+
+			# add co-occurance pair in summary
+			for i in range(len(summaryWords)-1):
+				currentWord = summaryWords[i]
+				nextWord = summaryWords[i+1]
+
+				# checking whether current word and next word are in query
+				if (currentWord.lower() in queryWordsLower) and (nextWord.lower() in queryWordsLower):
+					# update the constraints in coOccurDict
+					coOccurDict[(currentWord.lower(), nextWord.lower())] = coOccurDict[(currentWord.lower(), nextWord.lower())]+1
+		
+		# sort by the count of co-occurance pairs
+		sortedByLargest = sorted(coOccurDict.iteritems(), key=operator.itemgetter(1), reverse=True) 
+
+		# add those constraints to the results for re-ordering
+		results = [] # valid results for re-ordering
+
+		for (w1, w2), count in sortedByLargest:
+			# check if w2 appears in the existing results
+			if w2 in results:
+				# check if w2 in the beginning of existing results
+				if (w2 == results[0]) and (w1 not in results):
+					# append w2 in the beginning
+					results.insert(0, w1)
+				continue
+			# check if w1 appears in the existing results
+			if w1 in results:
+				# check if w1 in the end of existing results
+				if (w1 == results[len(results)-1]) and (w2 not in results):
+					# append w2 in the end
+					results.append(w2)
+				continue
+
+			# both w1 and w2 are not in existing results
+			results.append(w1)
+			results.append(w2)
+
+		# add those words not in results
+		for word in queryWordsLower:
+			if word not in results:
+				results.append(word)
+
+		# re-write query and internal query
+		self.query = " ".join(results)
+		self.internalQuery = "+".join(results)
+
+
 	def augmentQuery(self):
 		"""
-		Adds upto two new words to the query. Returns True if it could else False.
+		Adds up to two new words to the query. Returns True if it could else False.
 		Also, changes values to alpha*values for next iteration
 		"""
 		queryWords = frozenset(self.query.lower().split())
@@ -226,6 +311,8 @@ class User_Interface(object):
 
 		# If we did not get a new word, then we have to stop. Very unlikely.
 		if nWordsAdded > 0:
+			# re-order the words in query and return True
+			self.reorderQuery()
 			return True
 		else:
 			return False
