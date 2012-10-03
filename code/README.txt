@@ -31,17 +31,19 @@ For example, on a CLIC machine:
 cd /home/yd2234/ADB/proj1/code/COMSW6111_P1/code
 ./run.sh 'MWQrrA8YW+6ciAUTJh56VHz1vi/Mdqu0lSbzms3N7NY=' 0.9 'snow leopard'
 
+You can run our scripts directly by the commands above, since we have already put our scripts under that directory.
+
 -------------------------------------------------------------
 d) A clear description of the internal design of your project
 
-We have two python scripts: UI.py and web_query.py. The following are detailed description for each of them.
+We have two python scripts: UI.py and web_query.py. The following are detailed descriptions for each of them.
 
 1. web_query.py 
 This is a tool script for querying Bing API and parsing the XML results. The main functions include:
 	* search_Bing: search via Bing API and return the results in XML format 
 	* parse_XML: parse the XML content from Bing API, and return the title/summary/url for each search result
 	(Input: XML from function search_Bing; Output: a list of top 10 results with their titles, summaries and urls)
-It will firstly call function search_Bing and then call function parse_XML.
+We will firstly call function search_Bing and then call function parse_XML.
 
 2. UI.py
 This is the main python script for the user interface and ranking. The main functions include:
@@ -58,16 +60,18 @@ This is the main python script for the user interface and ranking. The main func
 
 	* display_search: use the tool script web_query.py to search Bing by the query and display search results. Users can give feedbacks by user interface.
 
-	* feedback_summary: compute the precision by retrieved results. Return True if more search is needed; otherwise return False (if number of relevant results is 0, or desired precision is reached)
+	* feedback_summary: compute the precision by retrieved results. Return True if more search is needed; otherwise return False (if number of relevant results is 0, or desired precision is reached).
 
-	* ranking: for each result, removes stopwords, ranks the word, augments the query and returns True if the query can be augmented, otherwise returns False
+	* ranking: for each result, removes stopwords, ranks the word, augments the query and returns True if the query can be augmented, otherwise returns False.
 
 	* applyRanking: compute the ranking score for a given word. Applies our ranking algorithm, based on Rocchio, depending on various factors, such as if it is a Title word, capitalized in the Summary etc.
 	It is called by function ranking.
 
-	* augmentQuery: adds up to two new words to the query. Returns True if it could else False. Also, changes scores for all the words to alpha*scores for next iteration.
+	* augmentQuery: adds up to two new words to the query. Returns True if it could, else False. Also, changes scores for all the words to alpha*scores for next iteration.
 	It is called by function ranking.
 
+	* reorderQuery: re-order the words in the expanded query, according to the co-occurance of word pairs in relevant documents.
+	It is called in the end of function augmentQuery.
 
 -------------------------------------------------------------
 e) A detailed description of your query-modification method
@@ -110,7 +114,7 @@ Using these observations (some of which are directly from Rocchio's algorithm su
 is the overview of our query modification method:
 
 In order to implement the ideas, we need a few constants. Since, we do not have enough time/resources
-to determine ideal values for the constants, we did so emperically after a few test runs:
+to determine ideal values for the constants, we did so empirically after a few test runs:
 
 Below are the constants that we used in our algorithm, which map to the ideas listed above. The names
 after the values in parantheses will be how we refer to them from now on.
@@ -193,3 +197,7 @@ g) Any other information you consider significant
 2. According to our experiment, all the testcases will need ONLY ONE iteraction of user-feedback before reaching the perfect precision (that is, precision=1.0).
 Besides the three testcases in course page ('snow leopard', 'gates' and 'bill'), we have tested query [giants] both for the New York Giants football team and the San Francisco Giants baseball team. 
 Those two teams share a lot of common words such as 'schedule'. In our program, "new york" or "san francisco" will be augmented in each case.
+
+3. For re-ordering methods, our augmented query will follow the word order in relevant documents if two query words occur adjacently. 
+For example, when the query is 'gates' and a new word 'bill' is augmented, the method without re-ordering will return 'gates bill', while our algorithm can get better result 'bill gates' by considering the textual information.
+And for the 'snow leopard' example, the query is augmented by 'mac x'. Our algorithm will get re-ordered result 'x snow leopard mac', since the phrase 'Mac OS X Snow Leopard' appears so often in relevant documents.

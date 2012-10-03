@@ -26,21 +26,29 @@ Result 2
 Relevant (Y/N)?Y
 Result 3
 [
+ URL: http://www.cio.com.au/books/product/mac-os-x-snow-leopard-digital-classroom/0470525681/
+ Title: Mac OS X Snow Leopard Digital Classroom - Books - CIO
+ Summary: Information Technology strategy insight for senior IT management - resources to understand and leverage information technology.
+]
+
+Relevant (Y/N)?Y
+Result 4
+[
  URL: http://animals.nationalgeographic.com/animals/mammals/snow-leopard/
  Title: Snow Leopards, Snow Leopard Pictures, Snow Leopard Facts ...
  Summary: Native to the Central Asian mountains, the snow leopard is a rare sight, with only about 6,000 left in the wild. They are hunted for their beautiful, warm fur and for ...
 ]
 
 Relevant (Y/N)?N
-Result 4
+Result 5
 [
  URL: http://www.amazon.com/s?ie=UTF8&keywords=snow%20leopard&page=1&rh=n%3A1036592%2Ck%3Asnow%20leopard
  Title: Amazon.com: snow leopard - Clothing & Accessories
- Summary: Snow Leopard Print Ultra Soft & Plush Infinity Circle Ring Scarf
+ Summary: Outer Rebel Fashion Deluxe Animal Hats with Attached Scarf & Mittens- Snow Leopard
 ]
 
 Relevant (Y/N)?N
-Result 5
+Result 6
 [
  URL: http://www.snowleopard.org/
  Title: Snow Leopard Trust | Saving Snow Leopards
@@ -48,19 +56,11 @@ Result 5
 ]
 
 Relevant (Y/N)?N
-Result 6
+Result 7
 [
  URL: http://en.wikipedia.org/wiki/Mac_OS_X_Snow_Leopard
  Title: Mac OS X Snow Leopard - Wikipedia, the free encyclopedia
- Summary: Mac OS X Snow Leopard (version 10.6) is the seventh major release of Mac OS X, Apple's desktop and server operating system for Macintosh computers. Snow ...
-]
-
-Relevant (Y/N)?Y
-Result 7
-[
- URL: http://www.ebay.com/sch/i.html?_nkw=snow+leopard
- Title: snow leopard | eBay - Electronics, Cars, Fashion, Collectibles ...
- Summary: Find snow leopard from a vast selection of Operating Systems. Shop eBay!
+ Summary: Mac OS X Snow Leopard (version 10.6) is the seventh major release of Mac OS X, Apple's desktop and server operating system for Macintosh computers. Snow Leopard was ...
 ]
 
 Relevant (Y/N)?Y
@@ -68,39 +68,39 @@ Result 8
 [
  URL: http://www.amazon.com/s?ie=UTF8&page=1&rh=i%3Aaps%2Ck%3Asnow%20leopard
  Title: Amazon.com: snow leopard
- Summary: Get it by Friday, Sept. 21 if you order in the next 10 hours and choose one-day shipping.
+ Summary: Office Mac Home and Student 2011 - Family Pack (1 User/3 Installs) [Download] by Microsoft (Software Download - Oct. 26, 2010) - Mac OS X 10.5 Leopard / 10.6 Snow ...
 ]
 
 Relevant (Y/N)?Y
 Result 9
 [
- URL: http://store.apple.com/us/search?find=mac+os+x+10.6+snow+leopard
- Title: Snow Leopard
- Summary:
+ URL: http://www.ebay.com/sch/i.html?_nkw=snow+leopard
+ Title: snow leopard | eBay - Electronics, Cars, Fashion, Collectibles ...
+ Summary: Find snow leopard from a vast selection of Operating Systems. Shop eBay!
 ]
 
 Relevant (Y/N)?Y
 Result 10
 [
- URL: http://www.sandiegozoo.org/animalbytes/t-snow_leopard.html
- Title: San Diego Zoo's Animal Bytes: Snow Leopard
- Summary: Get fun and interesting snow leopard facts in an easy-to-read style from the San Diego Zoo's Animal Bytes. Buy tickets online and plan a visit to the Zoo or Safari Park.
+ URL: http://www.downloadkeeper.com/mac-os-x-snow-leopard-10.6.0-crack-serial-download.html
+ Title: Mac Os X Snow Leopard 10.6.0 Crack Serial Download Full Version
+ Summary: Found 56 results for Mac Os X Snow Leopard 10.6.0. Full version downloads available, all hosted on high speed servers!
 ]
 
-Relevant (Y/N)?N
+Relevant (Y/N)?Y
 ======================
 FEEDBACK SUMMARY
 Query snow leopard
-Precision 0.5
+Precision 0.6
 Still below the desired precision of 0.9
 Indexing results ....
 Indexing results ....
 Augmenting by  mac x
 Parameters:
 Client key  = MWQrrA8YW+6ciAUTJh56VHz1vi/Mdqu0lSbzms3N7NY=
-Query       = snow leopard mac x
+Query       = x snow leopard mac
 Precision   = 0.9
-URL: https://api.datamarket.azure.com/Data.ashx/Bing/SearchWeb/v1/Web?Query=%27snow+leopard+mac+x%27&$top=10&$format=Atom
+URL: https://api.datamarket.azure.com/Data.ashx/Bing/SearchWeb/v1/Web?Query=%27x+snow+leopard+mac%27&$top=10&$format=Atom
 Total no of results : 10
 Bing Search Results:
 ======================
@@ -116,7 +116,7 @@ Result 2
 [
  URL: http://en.wikipedia.org/wiki/Mac_OS_X_Snow_Leopard
  Title: Mac OS X Snow Leopard - Wikipedia, the free encyclopedia
- Summary: Mac OS X Snow Leopard (version 10.6) is the seventh major release of Mac OS X, Apple's desktop and server operating system for Macintosh computers. Snow ...
+ Summary: Mac OS X Snow Leopard (version 10.6) is the seventh major release of Mac OS X, Apple's desktop and server operating system for Macintosh computers. Snow Leopard was ...
 ]
 
 Relevant (Y/N)?Y
@@ -132,51 +132,11 @@ Result 4
 [
  URL: http://store.apple.com/us/search?find=mac+os+x+10.6+snow+leopard
  Title: Snow Leopard
- Summary:
+ Summary: 
 ]
 
 Relevant (Y/N)?Y
 Result 5
-[
- URL: http://download.cnet.com/Apple-Mac-OS-X-Snow-Leopard/3000-18513_4-90306.html
- Title: Apple Mac OS X Snow Leopard for Mac - CNET Download.com
- Summary: Eye-to-eye with Snow Leopard screenshots 1-2 of 8 Scroll Left Scroll Right Sneaking in a few days before its promised September release, the tune-up for Mac OS X ...
-]
-
-Relevant (Y/N)?Y
-Result 6
-[
- URL: http://www.cnet.com/mac-os-x-snow-leopard/
- Title: Mac OS X - Apple Mac Lion and Snow Leopard reviews and news - CNET.com
- Summary: CNET's comprehensive Mac OS X Lion and OS X Snow Leopard coverage: Get in-depth analysis of Lion's new features, how much it will cost you, what you'll ...
-]
-
-Relevant (Y/N)?Y
-Result 7
-[
- URL: http://www.computerworld.com/s/article/9231513/Apple_goes_against_grain_extends_support_for_Snow_Leopard
- Title: Apple goes against grain, extends support for Snow Leopard ...
- Summary: Computerworld - Apple yesterday quietly released a security update for OS X 10.6, aka Snow Leopard, effectively extending support for the three-year-old OS beyond the ...
-]
-
-Relevant (Y/N)?Y
-Result 8
-[
- URL: http://www.macworld.com/article/1142423/snow_leopard_review.html
- Title: Review: Snow Leopard | Macworld - Apple, Mac, iPhone, iPad, and ...
- Summary: Snow Leopard is a solid collection of tweaks and upgrades for a low price, Jason Snell says. Here's an in-depth review.
-]
-
-Relevant (Y/N)?Y
-Result 9
-[
- URL: http://www.gosale.com/4980799/mac-os-x-1063-snow-leopard
- Title: Mac OS X 10.6.3 Snow Leopard on sale for $99.77
- Summary: On sale at 10 deals for the Mac OS X 10.6.3 Snow Leopard at GoSale for just $94.00 if you buy today. Shop for bargains on the Apple OS 10.6.3.
-]
-
-Relevant (Y/N)?Y
-Result 10
 [
  URL: http://www.ebay.com/sch/i.html?_nkw=mac+os+x+snow+leopard
  Title: mac os x snow leopard | eBay - Electronics, Cars, Fashion ...
@@ -184,9 +144,49 @@ Result 10
 ]
 
 Relevant (Y/N)?Y
+Result 6
+[
+ URL: http://en.wikipedia.org/wiki/Mac_leopard
+ Title: Mac OS X Leopard - Wikipedia, the free encyclopedia
+ Summary: Since Apple moved to using Intel processors in their computers, the OSx86 project has developed and now also allows Mac OS X Tiger, Leopard, and Snow Leopard to be ...
+]
+
+Relevant (Y/N)?Y
+Result 7
+[
+ URL: http://download.cnet.com/Apple-Mac-OS-X-Snow-Leopard/3000-18513_4-90306.html
+ Title: Apple Mac OS X Snow Leopard for Mac - CNET Download.com
+ Summary: Eye-to-eye with Snow Leopard screenshots 1-2 of 8 Scroll Left Scroll Right Sneaking in a few days before its promised September release, the tune-up for Mac OS X ...
+]
+
+Relevant (Y/N)?Y
+Result 8
+[
+ URL: http://www.computerworld.com/s/article/9231513/Apple_goes_against_grain_extends_support_for_Snow_Leopard
+ Title: Apple goes against grain, extends support for Snow Leopard ...
+ Summary: Computerworld - Apple yesterday quietly released a security update for OS X 10.6, aka Snow Leopard, effectively extending support for the three-year-old OS beyond the ...
+]
+
+Relevant (Y/N)?Y
+Result 9
+[
+ URL: http://www.amazon.com/Mac-version-10-6-3-Snow-Leopard/dp/B001AMHWP8
+ Title: Amazon.com: Mac OS X version 10.6.3 Snow Leopard: Software
+ Summary: Mac OS X Snow Leopard is an even more powerful and refined version of the world’s most advanced operating system. In ways big and small, it gets faster, more ...
+]
+
+Relevant (Y/N)?Y
+Result 10
+[
+ URL: http://www.macworld.com/article/1142423/snow_leopard_review.html
+ Title: Review: Snow Leopard | Macworld - Apple, Mac, iPhone, iPad, and ...
+ Summary: Snow Leopard is a solid collection of tweaks and upgrades for a low price, Jason Snell says. Here's an in-depth review.
+]
+
+Relevant (Y/N)?Y
 ======================
 FEEDBACK SUMMARY
-Query snow leopard mac x
+Query x snow leopard mac
 Precision 1.0
 Desired precision reached, done
 
@@ -205,7 +205,7 @@ Bing Search Results:
 Result 1
 [
  URL: http://gates.com/
- Title: Gates Corporation
+ Title: Powering Progress™ in belts, hose & hydraulics
  Summary: Gates Corporation is Powering Progress™ in the Oil & Gas, Energy, Mining, Marine, Agriculture, Transportation and Automotive Industries.
 ]
 
@@ -228,93 +228,13 @@ Result 3
 Relevant (Y/N)?Y
 Result 4
 [
- URL: http://www.gatesfoundation.org/Pages/home.aspx
- Title: Bill & Melinda Gates Foundation
- Summary: Social Good Summit (SGS) is a conference where big ideas meet new media to create innovative solutions. Citizens around the world will unite to form a real global ...
+ URL: http://news.yahoo.com/gates-windows-8-system-very-exciting-161811335--finance.html
+ Title: Gates: New Windows 8 system is 'very exciting' - Yahoo! News
+ Summary: NEW YORK (AP) — Microsoft founder Bill Gates on Thursday called the new Windows 8 operating system scheduled for release next month "a very exciting new product ...
 ]
 
 Relevant (Y/N)?Y
 Result 5
-[
- URL: http://en.wikipedia.org/wiki/Robert_Gates
- Title: Robert Gates - Wikipedia, the free encyclopedia
- Summary: Robert Michael Gates (born September 25, 1943) is a retired civil servant and university president who served as the 22nd United States Secretary of Defense from 2006 ...
-]
-
-Relevant (Y/N)?N
-Result 6
-[
- URL: http://www.gatesbbq.com/
- Title: Gates Bar B.Q.
- Summary: Offers BBQ ribs and other meats. Recipes, online sales of BBQ sauces and spices, and a history of the chain. Locations in Kansas and Missouri, United States.
-]
-
-Relevant (Y/N)?N
-Result 7
-[
- URL: http://www.microsoft.com/en-us/news/exec/billg/
- Title: Bill Gates: Chairman - Microsoft Corporation: Software ...
- Summary: Updated: Aug. 3, 2011. William (Bill) H. Gates is chairman of Microsoft Corporation, the worldwide leader in software, services and solutions that help ...
-]
-
-Relevant (Y/N)?Y
-Result 8
-[
- URL: http://abcnews.go.com/Technology/wireStory/gates-windows-system-exciting-17338984
- Title: Gates: New Windows 8 System Is 'Very Exciting' - ABC News
- Summary: Microsoft founder Bill Gates says the new Windows 8 operating system scheduled for release next month is "a very exciting new product" and "a very big deal ...
-]
-
-Relevant (Y/N)?Y
-Result 9
-[
- URL: http://www.gatespreowned.com/
- Title: Used Cars South Bend | Used Cars Dealers South Bend | Used Auto ...
- Summary: A Premier car dealer for South Bend, Indiana area with a huge inventory of cars, trucks and SUVs to choose from.
-]
-
-Relevant (Y/N)?N
-Result 10
-[
- URL: http://www.toysrus.com/family/index.jsp?categoryId=2256222
- Title: Baby Gates - Babies"R"Us
- Summary: Safe & durable baby gates will keep your baby safe. Choose from a large assortment of baby gates including extra wide gates to suit your needs. Shop today.
-]
-
-Relevant (Y/N)?N
-======================
-FEEDBACK SUMMARY
-Query gates
-Precision 0.4
-Still below the desired precision of 0.9
-Indexing results ....
-Indexing results ....
-Augmenting by  bill
-Parameters:
-Client key  = MWQrrA8YW+6ciAUTJh56VHz1vi/Mdqu0lSbzms3N7NY=
-Query       = gates bill
-Precision   = 0.9
-URL: https://api.datamarket.azure.com/Data.ashx/Bing/SearchWeb/v1/Web?Query=%27gates+bill%27&$top=10&$format=Atom
-Total no of results : 10
-Bing Search Results:
-======================
-Result 1
-[
- URL: http://en.wikipedia.org/wiki/Bill_Gates
- Title: Bill Gates - Wikipedia, the free encyclopedia
- Summary: William Henry "Bill" Gates III (born October 28, 1955) is an American business magnate and philanthropist. Gates is the former chief executive and current chairman of ...
-]
-
-Relevant (Y/N)?Y
-Result 2
-[
- URL: http://www.microsoft.com/en-us/news/exec/billg/
- Title: Bill Gates: Chairman - Microsoft Corporation: Software ...
- Summary: Updated: Aug. 3, 2011. William (Bill) H. Gates is chairman of Microsoft Corporation, the worldwide leader in software, services and solutions that help ...
-]
-
-Relevant (Y/N)?Y
-Result 3
 [
  URL: http://www.gatesfoundation.org/Pages/home.aspx
  Title: Bill & Melinda Gates Foundation
@@ -322,31 +242,79 @@ Result 3
 ]
 
 Relevant (Y/N)?Y
-Result 4
+Result 6
+[
+ URL: http://en.wikipedia.org/wiki/Robert_Gates
+ Title: Robert Gates - Wikipedia, the free encyclopedia
+ Summary: Robert Michael Gates (born September 25, 1943) is a retired civil servant and university president who served as the 22nd United States Secretary of Defense from 2006 ...
+]
+
+Relevant (Y/N)?N
+Result 7
+[
+ URL: http://www.gatesbbq.com/
+ Title: Gates Bar B.Q.
+ Summary: Offers BBQ ribs and other meats. Recipes, online sales of BBQ sauces and spices, and a history of the chain. Locations in Kansas and Missouri, United States.
+]
+
+Relevant (Y/N)?N
+Result 8
+[
+ URL: http://www.gatesinc.com/
+ Title: GATES, Florida construction, development, brokerage, leasing ...
+ Summary: Gates, Inc. - Providing South Florida construction, development, brokerage, leasing, and property management services.
+]
+
+Relevant (Y/N)?N
+Result 9
+[
+ URL: http://www.microsoft.com/en-us/news/exec/billg/
+ Title: Bill Gates: Chairman - Microsoft Corporation: Software ...
+ Summary: Updated: Aug. 3, 2011. William (Bill) H. Gates is chairman of Microsoft Corporation, the worldwide leader in software, services and solutions that help ...
+]
+
+Relevant (Y/N)?Y
+Result 10
+[
+ URL: http://money.cnn.com/2012/09/27/pf/college/gates-college-apps/index.html
+ Title: Gates Foundation awarding up to $100,000 grants for college apps ...
+ Summary: NEW YORK (CNNMoney) -- The Bill and Melinda Gates Foundation is launching a competition today that will award up to 30 grants of $50,000 to $100,000 to ...
+]
+
+Relevant (Y/N)?Y
+======================
+FEEDBACK SUMMARY
+Query gates
+Precision 0.5
+Still below the desired precision of 0.9
+Indexing results ....
+Indexing results ....
+Augmenting by  bill
+Parameters:
+Client key  = MWQrrA8YW+6ciAUTJh56VHz1vi/Mdqu0lSbzms3N7NY=
+Query       = bill gates
+Precision   = 0.9
+URL: https://api.datamarket.azure.com/Data.ashx/Bing/SearchWeb/v1/Web?Query=%27bill+gates%27&$top=10&$format=Atom
+Total no of results : 10
+Bing Search Results:
+======================
+Result 1
 [
  URL: http://www.thegatesnotes.com/
  Title: The Official Site of Bill Gates - The Gates Notes
- Summary: Global efforts have brought us close to eradicating polio forever. This week at the United Nations, world leaders meet to talk about putting an end to polio.
+ Summary: How do we help raise the profile on polio when there are so many other topics competing for attention?
 ]
 
 Relevant (Y/N)?Y
-Result 5
+Result 2
 [
- URL: https://twitter.com/billgates
- Title: Bill Gates (BillGates) on Twitter
- Summary: Instantly connect to what's most important to you. Follow your friends, experts, favorite celebrities, and breaking news.
+ URL: http://en.wikipedia.org/wiki/Bill_Gates
+ Title: Bill Gates - Wikipedia, the free encyclopedia
+ Summary: William Henry "Bill" Gates III (born October 28, 1955) is an American business magnate and philanthropist. Gates is the former chief executive and current chairman of ...
 ]
 
 Relevant (Y/N)?Y
-Result 6
-[
- URL: http://www.huffingtonpost.com/2012/09/27/bill-gates-windows-8-microsoft_n_1919877.html
- Title: Bill Gates On Windows 8: 'I'm Very Pleased With It'
- Summary: NEW YORK (AP) — Microsoft founder Bill Gates on Thursday called the new Windows 8 operating system scheduled for release next month "a very exciting new ...
-]
-
-Relevant (Y/N)?Y
-Result 7
+Result 3
 [
  URL: http://www.biography.com/people/bill-gates-9307520
  Title: Bill Gates Biography - Facts, Birthday, Life Story - Biography.com
@@ -354,7 +322,15 @@ Result 7
 ]
 
 Relevant (Y/N)?Y
-Result 8
+Result 4
+[
+ URL: http://www.microsoft.com/en-us/news/exec/billg/
+ Title: Bill Gates: Chairman - Microsoft Corporation: Software ...
+ Summary: Updated: Aug. 3, 2011. William (Bill) H. Gates is chairman of Microsoft Corporation, the worldwide leader in software, services and solutions that help ...
+]
+
+Relevant (Y/N)?Y
+Result 5
 [
  URL: http://www.forbes.com/profile/bill-gates/
  Title: Bill Gates - Forbes - Information for the World's Business Leaders ...
@@ -362,15 +338,23 @@ Result 8
 ]
 
 Relevant (Y/N)?Y
-Result 9
+Result 6
 [
- URL: http://www.gatesfoundation.org/leadership/Pages/bill-gates.aspx
- Title: Bill Gates – Bill & Melinda Gates Foundation
- Summary: Bill Gates shapes and approves foundation strategies, reviews results, advocates for the foundation’s issues, and helps set the overall direction of the organization.
+ URL: http://www.amazon.com/s?ie=UTF8&keywords=Bill%20Gates&page=1&rh=n%3A283155%2Ck%3ABill%20Gates
+ Title: Amazon.com: Bill Gates: Books
+ Summary: Discover books, read about the author, find related products, and more. Visit the page.
 ]
 
 Relevant (Y/N)?Y
-Result 10
+Result 7
+[
+ URL: http://www.amazon.com/s?ie=UTF8&keywords=Bill%20Gates&page=1&rh=i%3Aaps%2Ck%3ABill%20Gates
+ Title: Amazon.com: Bill Gates
+ Summary: Pirates of Silicon Valley by Anthony Michael Hall, Noah Wyle, Joey Slotnick and Martyn Burke (Amazon Instant Video)
+]
+
+Relevant (Y/N)?Y
+Result 8
 [
  URL: http://www.thocp.net/biographies/gates_bill.htm
  Title: Bill Gates - the history of computing project
@@ -378,9 +362,25 @@ Result 10
 ]
 
 Relevant (Y/N)?Y
+Result 9
+[
+ URL: http://www.gatesfoundation.org/
+ Title: Bill & Melinda Gates Foundation
+ Summary: Global Luminaries Issue Urgent Call for Polio-Free World Read Bill Gates' speech at the UN Event
+]
+
+Relevant (Y/N)?Y
+Result 10
+[
+ URL: https://twitter.com/billgates
+ Title: Bill Gates (BillGates) on Twitter
+ Summary: Instantly connect to what's most important to you. Follow your friends, experts, favorite celebrities, and breaking news.
+]
+
+Relevant (Y/N)?Y
 ======================
 FEEDBACK SUMMARY
-Query gates bill
+Query bill gates
 Precision 1.0
 Desired precision reached, done
 
@@ -496,7 +496,7 @@ Result 1
 [
  URL: http://www.thegatesnotes.com/
  Title: The Official Site of Bill Gates - The Gates Notes
- Summary: Global efforts have brought us close to eradicating polio forever. This week at the United Nations, world leaders meet to talk about putting an end to polio.
+ Summary: How do we help raise the profile on polio when there are so many other topics competing for attention?
 ]
 
 Relevant (Y/N)?Y
@@ -558,17 +558,17 @@ Result 8
 Relevant (Y/N)?Y
 Result 9
 [
- URL: https://twitter.com/billgates
- Title: Bill Gates (BillGates) on Twitter
- Summary: Instantly connect to what's most important to you. Follow your friends, experts, favorite celebrities, and breaking news.
+ URL: http://www.gatesfoundation.org/
+ Title: Bill & Melinda Gates Foundation
+ Summary: Global Luminaries Issue Urgent Call for Polio-Free World Read Bill Gates' speech at the UN Event
 ]
 
 Relevant (Y/N)?Y
 Result 10
 [
- URL: http://www.gatesfoundation.org/Pages/home.aspx
- Title: Bill & Melinda Gates Foundation
- Summary: Social Good Summit (SGS) is a conference where big ideas meet new media to create innovative solutions. Citizens around the world will unite to form a real global ...
+ URL: https://twitter.com/billgates
+ Title: Bill Gates (BillGates) on Twitter
+ Summary: Instantly connect to what's most important to you. Follow your friends, experts, favorite celebrities, and breaking news.
 ]
 
 Relevant (Y/N)?Y
@@ -577,3 +577,5 @@ FEEDBACK SUMMARY
 Query bill gates
 Precision 1.0
 Desired precision reached, done
+
+
