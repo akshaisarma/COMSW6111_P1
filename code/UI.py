@@ -225,6 +225,10 @@ class User_Interface(object):
 				currentWord = summaryWords[i]
 				nextWord = summaryWords[i+1]
 
+				# check if they are the identical words
+				if currentWord.lower() == nextWord.lower():
+					continue
+
 				# checking whether current word and next word are in query
 				if (currentWord.lower() in queryWordsLower) and (nextWord.lower() in queryWordsLower):
 					# update the constraints in coOccurDict
@@ -232,17 +236,22 @@ class User_Interface(object):
 		
 		# sort by the count of co-occurance pairs
 		sortedByLargest = sorted(coOccurDict.iteritems(), key=operator.itemgetter(1), reverse=True) 
+		print sortedByLargest
 
 		# add those constraints to the results for re-ordering
 		results = [] # valid results for re-ordering
 
 		for (w1, w2), count in sortedByLargest:
+			# check if two words are identical
+			if w1 == w2:
+				continue
 			# check if w2 appears in the existing results
 			if w2 in results:
 				# check if w2 in the beginning of existing results
 				if (w2 == results[0]) and (w1 not in results):
 					# append w2 in the beginning
 					results.insert(0, w1)
+				print results
 				continue
 			# check if w1 appears in the existing results
 			if w1 in results:
@@ -250,11 +259,13 @@ class User_Interface(object):
 				if (w1 == results[len(results)-1]) and (w2 not in results):
 					# append w2 in the end
 					results.append(w2)
+				print results
 				continue
 
 			# both w1 and w2 are not in existing results
 			results.append(w1)
 			results.append(w2)
+			print results
 
 		# add those words not in results
 		for word in queryWordsLower:
