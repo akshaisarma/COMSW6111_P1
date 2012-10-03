@@ -42,6 +42,21 @@ alpha = 0.8
 beta = 1.5
 # =============== CONSTANTS =================
 
+
+def updateCoOccurDict(currentWord, nextWord, coOccurDict, queryWordsLower):
+	"""
+	Tool function: update the co-occurance dictionary by (currentWord, nextWord) pair
+	"""
+	# check if they are the identical words
+	if currentWord.lower() == nextWord.lower():
+		return
+
+	# checking whether current word and next word are in query
+	if (currentWord.lower() in queryWordsLower) and (nextWord.lower() in queryWordsLower):
+		# update the constraints in coOccurDict
+		coOccurDict[(currentWord.lower(), nextWord.lower())] = coOccurDict[(currentWord.lower(), nextWord.lower())]+1
+
+
 class User_Interface(object):
 
 	def __init__ (self, accountKey, precision, query):
@@ -211,28 +226,17 @@ class User_Interface(object):
 				currentWord = titleWords[i]
 				nextWord = titleWords[i+1]
 
-				# check if they are the identical words
-				if currentWord.lower() == nextWord.lower():
-					continue
-
-				# checking whether current word and next word are in query
-				if (currentWord.lower() in queryWordsLower) and (nextWord.lower() in queryWordsLower):
-					# update the constraints in coOccurDict
-					coOccurDict[(currentWord.lower(), nextWord.lower())] = coOccurDict[(currentWord.lower(), nextWord.lower())]+1
+				# update coOccurDict
+				updateCoOccurDict(currentWord, nextWord, coOccurDict, queryWordsLower)
 
 			# add co-occurance pair in summary
 			for i in range(len(summaryWords)-1):
 				currentWord = summaryWords[i]
 				nextWord = summaryWords[i+1]
 
-				# check if they are the identical words
-				if currentWord.lower() == nextWord.lower():
-					continue
+				# update coOccurDict
+				updateCoOccurDict(currentWord, nextWord, coOccurDict, queryWordsLower)
 
-				# checking whether current word and next word are in query
-				if (currentWord.lower() in queryWordsLower) and (nextWord.lower() in queryWordsLower):
-					# update the constraints in coOccurDict
-					coOccurDict[(currentWord.lower(), nextWord.lower())] = coOccurDict[(currentWord.lower(), nextWord.lower())]+1
 		
 		# sort by the count of co-occurance pairs
 		sortedByLargest = sorted(coOccurDict.iteritems(), key=operator.itemgetter(1), reverse=True) 
